@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.jsp.orm">
+
+	<class name="EmployeeDto" table="person_table">
+		<id name="eno">
+			<generator class="increment">
+			</generator>
+		</id>
+		<discriminator column="type" />
+		<property name="ename" />
+
+		<subclass name="Hourly_employee" extends="EmployeeDto"
+			discriminator-value="hourly">
+
+			<property name="no_of_hours_perDay" />
+			<property name="hourly_rate" />
+
+		</subclass>
+
+		<subclass name="Salaried_employee" extends="EmployeeDto"
+			discriminator-value="salaried">
+
+			<property name="annual_Salary" />
+
+
+		</subclass>
+
+	</class>
+</hibernate-mapping>
